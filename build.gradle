@@ -1,7 +1,7 @@
 plugins {
-	id 'org.springframework.boot' version '2.6.6'
-	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
-	id 'groovy'
+  id 'org.springframework.boot' version '2.6.6'
+  id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+  id 'groovy'
 }
 
 group = 'com.example'
@@ -9,96 +9,48 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '11'
 
 configurations {
-	compileOnly {
-		extendsFrom annotationProcessor
-	}
+  compileOnly {
+    extendsFrom annotationProcessor
+  }
 }
 
 repositories {
-	mavenCentral()
+  mavenCentral()
 }
 
 dependencies {
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	implementation 'org.codehaus.groovy:groovy'
-	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+  implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.codehaus.groovy:groovy'
+  annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+  testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-	implementation 'org.apache.camel:camel-spring-boot:2.16.2'
-	// implementation 'org.codehaus.groovy:groovy-all:2.4.5'
-	implementation 'org.apache.camel:camel-groovy:2.16.2'
+  implementation 'org.apache.camel:camel-spring-boot:2.16.2'
+  // implementation 'org.codehaus.groovy:groovy-all:2.4.5'
+  implementation 'org.apache.camel:camel-groovy:2.16.2'
 
-	implementation 'com.h2database:h2'
-	implementation 'org.apache.camel:camel-jpa:2.16.2'
-	implementation 'org.apache.camel:camel-sql:2.16.2'
- 
-	implementation 'org.apache.camel:camel-jetty:2.16.2'
-	implementation 'org.apache.camel:camel-jackson:2.16.2'
+  implementation 'com.h2database:h2'
+  implementation 'org.apache.camel:camel-jpa:2.16.2'
+  implementation 'org.apache.camel:camel-sql:2.16.2'
+
+  implementation 'org.apache.camel:camel-jetty:2.16.2'
+  implementation 'org.apache.camel:camel-jackson:2.16.2'
 }
 
 tasks.named('test') {
-	useJUnitPlatform()
+  useJUnitPlatform()
 }
 
-// buildscript {
-// 	repositories {
-// 		mavenCentral()
-// 	}
-// 	dependencies {
-// 		classpath "org.springframework.boot:spring-boot-gradle-plugin:2.6.6"
-// 		classpath('se.transmode.gradle:gradle-docker:1.2')
-// 	}
-// }
-// 
-// apply plugin: 'groovy'
-// apply plugin: 'org.springframework.boot'
-// 
-// apply plugin: 'docker'
-// 
-// jar {
-// 	baseName = 'thing-service'
-// 	version =  '1.0.0'
-// }
-// 
-// repositories {
-// 	mavenCentral()
-// }
-// 
-// sourceCompatibility = 1.8
-// targetCompatibility = 1.8
-// 
-// dependencies {
-// 	compileOnly 'org.springframework.boot:spring-boot-starter-data-jpa'
-// 	compileOnly 'org.springframework.boot:spring-boot-starter-web'
-// 	// compileOnly 'org.springframework.boot:spring-boot-starter'
-// 	compileOnly 'org.apache.camel:camel-spring-boot:2.16.2'
-// 	compileOnly 'org.codehaus.groovy:groovy-all:2.4.5'
-// 	compileOnly 'org.apache.camel:camel-groovy:2.16.2'
-// 
-// 	// compileOnly 'org.springframework.boot:spring-boot-starter-data-jpa'
-// 	// runtimeOnly 'org.springframework.boot:spring-boot-starter-data-jpa'
-// 	runtimeOnly 'com.h2database:h2'
-// 	compileOnly 'org.apache.camel:camel-jpa:2.16.2'
-// 	compileOnly 'org.apache.camel:camel-sql:2.16.2'
-// 
-// 	compileOnly 'org.apache.camel:camel-jetty:2.16.2'
-// 	compileOnly 'org.apache.camel:camel-jackson:2.16.2'
-// }
-// 
-// // task wrapper(type: Wrapper) {
-// // 	gradleVersion = '2.3'
-// // }
-// 
+// TODO get docker working
 // docker {
-// 	baseImage 'java:8-jre-alpine'
-// 	maintainer 'sohrab <sohrab.hosseini@gmail.com>'
+//  baseImage 'java:8-jre-alpine'
+//  maintainer 'sohrab <sohrab.hosseini@gmail.com>'
 // }
-// 
+//
 // task buildDocker(type: Docker) {
-// 	dependsOn build
-// 	applicationName = jar.baseName
-// 
-// 	addFile jar.archivePath, '/app.jar'
-// 	defaultCommand([ 'java', '-jar', '/app.jar' ])
-// 	exposePort 8080
+//  dependsOn build
+//  applicationName = jar.baseName
+//
+//  addFile jar.archivePath, '/app.jar'
+//  defaultCommand([ 'java', '-jar', '/app.jar' ])
+//  exposePort 8080
 // }
