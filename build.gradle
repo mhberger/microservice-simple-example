@@ -20,20 +20,27 @@ repositories {
 
 dependencies {
   implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+  implementation 'org.springframework.boot:spring-boot-starter-jdbc'
   implementation 'org.codehaus.groovy:groovy'
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
-  implementation 'org.apache.camel:camel-spring-boot:2.16.2'
-  // implementation 'org.codehaus.groovy:groovy-all:2.4.5'
-  implementation 'org.apache.camel:camel-groovy:2.16.2'
+  implementation 'org.apache.camel.springboot:camel-rest-starter:3.16.0'
+  implementation 'org.apache.camel.springboot:camel-groovy-starter:3.16.0'
+  implementation 'org.apache.camel.springboot:camel-spring-boot:3.16.0'
+  implementation 'org.apache.camel:camel-groovy:3.16.0'
 
   implementation 'com.h2database:h2'
-  implementation 'org.apache.camel:camel-jpa:2.16.2'
-  implementation 'org.apache.camel:camel-sql:2.16.2'
+  implementation 'org.apache.camel.springboot:camel-jpa-starter:3.16.0'
+  implementation 'org.apache.camel.springboot:camel-sql-starter:3.16.0'
+  implementation 'org.apache.camel.springboot:camel-direct-starter:3.16.0'
+  implementation 'org.apache.camel.springboot:camel-bean-starter:3.16.0'
+  implementation 'org.apache.camel:camel-jpa:3.16.0'
+  implementation 'org.apache.camel:camel-sql:3.16.0'
 
-  implementation 'org.apache.camel:camel-jetty:2.16.2'
-  implementation 'org.apache.camel:camel-jackson:2.16.2'
+  implementation 'org.apache.camel.springboot:camel-jetty-starter:3.16.0'
+  implementation 'org.apache.camel:camel-jetty:3.16.0'
+  implementation 'org.apache.camel:camel-jackson:3.16.0'
 }
 
 tasks.named('test') {

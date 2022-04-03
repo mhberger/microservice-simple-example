@@ -42,19 +42,28 @@ class RestRoute extends RouteBuilder {
 			.to('jpa:au.com.sixtree.blog.Thing')
 
 		from('direct:getThing')
-			.to('sql:select * from THING where id = :#${header.id}?dataSource=dataSource&outputType=SelectOne')
-			.beanRef('transformer', 'mapThing')
+//			.to('sql:select * from THING where id = :#${header.id}?dataSource=dataSource&outputType=SelectOne')
+			.to('sql:select * from THING where id = :#${header.id}?outputType=SelectOne')
+//			.beanRef('transformer', 'mapThing')
+			.bean('transformer', 'mapThing')
 
 		from('direct:getThings')
-			.setProperty('query').method('transformer', 'constructQuery(${headers})')
-			.toD('sql:${property.query}?dataSource=dataSource')
-			.beanRef('transformer', 'mapThingSearchResults')
+//			.setProperty('query').method('transformer', 'constructQuery(${headers})')
+//			.setProperty('query', constant('select * from thing'))
+//			.setProperty('query', method("transformer.constructQuery('${headers}')")
+//			.to('sql:${property.query}?dataSource=dataSource')
+//			.to('sql:${property.query}')
+//			.to('sql:${query}')
+			.to('sql:select * from thing')
+//			.beanRef('transformer', 'mapThingSearchResults')
+			.bean('transformer', 'mapThingSearchResults')
 
 		from('direct:removeThing')
 			.to('direct:getThing')
 			.setProperty('thing', body())
-			.to('sql:delete from THING where id = :#${body.id}?dataSource=dataSource')
-			.setBody(property('thing'))
+//			.to('sql:delete from THING where id = :#${body.id}?dataSource=dataSource')
+			.to('sql:delete from THING where id = :#${body.id}')
+//			.setBody(property('thing'))
 	}
 }
 
@@ -94,7 +103,7 @@ class Transformer {
 
 	ThingSearchResults mapThingSearchResults(List<Map> body) {
 		new ThingSearchResults(
-			size: body.size,
+			size: body.size(),
 			things: body.collect { mapThing it }
 		)
 	}
