@@ -25,6 +25,7 @@ dependencies {
   annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
   testImplementation 'org.springframework.boot:spring-boot-starter-test'
 
+  implementation 'org.apache.camel.springboot:camel-core-starter:3.16.0'
   implementation 'org.apache.camel.springboot:camel-rest-starter:3.16.0'
   implementation 'org.apache.camel.springboot:camel-groovy-starter:3.16.0'
   implementation 'org.apache.camel.springboot:camel-spring-boot:3.16.0'

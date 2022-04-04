@@ -54,6 +54,7 @@ class RestRoute extends RouteBuilder {
 //			.to('sql:${property.query}?dataSource=dataSource')
 //			.to('sql:${property.query}')
 //			.to('sql:${query}')
+//		     .process()
 			.to('sql:select * from thing')
 //			.beanRef('transformer', 'mapThingSearchResults')
 			.bean('transformer', 'mapThingSearchResults')
@@ -86,6 +87,7 @@ class Transformer {
 	}
 
 	String constructQuery(Map headers) {
+		println "MHB headers = $headers"
 		def wheres = []
 		if (headers.name) {
 			wheres << 'name = :#${header.name}'
