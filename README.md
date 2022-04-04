@@ -1,7 +1,7 @@
 Simple Microservice Example
 ===========================
 
-This is the source code for [_Microservices with Apache Camel, Spring Boot and Docker_](http://sixtree.com.au/articles/2016/microservices-springboot-camel-docker/)
+This is the source code for [_Microservices with Apache Camel, Spring Boot and Docker_](https://platform.deloitte.com.au/articles/2016/microservices-springboot-camel-docker/)
 blog post on the Deloitte (former Sixtree) website.
 
 Using Groovy, Gradle, Apache Camel, Spring Boot and Docker, we demonstrate how
@@ -15,6 +15,7 @@ To run the application through Spring Boot (not Docker):
   $ gradle bootRun
 ```
 
+NOTE: Docker build and run not working just yet.
 To build the Docker image for the project:
 
 ```
