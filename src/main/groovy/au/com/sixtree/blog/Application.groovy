@@ -1,5 +1,8 @@
 package au.com.sixtree.blog
 
+import org.apache.camel.Exchange
+import org.apache.camel.Processor
+
 import static org.apache.camel.builder.PredicateBuilder.and
 
 import javax.persistence.*
@@ -48,14 +51,21 @@ class RestRoute extends RouteBuilder {
 			.bean('transformer', 'mapThing')
 
 		from('direct:getThings')
-//			.setProperty('query').method('transformer', 'constructQuery(${headers})')
+			.setProperty('query').method('transformer', 'constructQuery(${headers})')
 //			.setProperty('query', constant('select * from thing'))
 //			.setProperty('query', method("transformer.constructQuery('${headers}')")
 //			.to('sql:${property.query}?dataSource=dataSource')
 //			.to('sql:${property.query}')
 //			.to('sql:${query}')
-//		     .process()
-			.to('sql:select * from thing')
+		     .process(new Processor() {
+				 @Override
+				 void process(Exchange exchange) throws Exception {
+					 println "Hello world"
+
+				 }
+			 })
+//			.to('sql:select * from thing')
+			.toD('sql:$simple{exchangeProperty.query}')
 //			.beanRef('transformer', 'mapThingSearchResults')
 			.bean('transformer', 'mapThingSearchResults')
 
