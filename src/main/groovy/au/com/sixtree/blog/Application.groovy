@@ -2,18 +2,18 @@ package au.com.sixtree.blog
 
 import org.apache.camel.Exchange
 import org.apache.camel.Processor
-
-import static org.apache.camel.builder.PredicateBuilder.and
-
-import javax.persistence.*
 import org.apache.camel.builder.RouteBuilder
 import org.apache.camel.model.rest.RestBindingMode
-import org.apache.camel.model.rest.RestParamType
 import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.SpringApplication
 import org.springframework.boot.autoconfigure.SpringBootApplication
 import org.springframework.stereotype.Component
- 
+
+import javax.persistence.Column
+import javax.persistence.Entity
+import javax.persistence.GeneratedValue
+import javax.persistence.Id
+
 @Component
 class RestRoute extends RouteBuilder {
  
@@ -45,18 +45,11 @@ class RestRoute extends RouteBuilder {
 			.to('jpa:au.com.sixtree.blog.Thing')
 
 		from('direct:getThing')
-//			.to('sql:select * from THING where id = :#${header.id}?dataSource=dataSource&outputType=SelectOne')
 			.to('sql:select * from THING where id = :#${header.id}?outputType=SelectOne')
-//			.beanRef('transformer', 'mapThing')
 			.bean('transformer', 'mapThing')
 
 		from('direct:getThings')
 			.setProperty('query').method('transformer', 'constructQuery(${headers})')
-//			.setProperty('query', constant('select * from thing'))
-//			.setProperty('query', method("transformer.constructQuery('${headers}')")
-//			.to('sql:${property.query}?dataSource=dataSource')
-//			.to('sql:${property.query}')
-//			.to('sql:${query}')
 		     .process(new Processor() {
 				 @Override
 				 void process(Exchange exchange) throws Exception {
@@ -64,17 +57,13 @@ class RestRoute extends RouteBuilder {
 
 				 }
 			 })
-//			.to('sql:select * from thing')
 			.toD('sql:$simple{exchangeProperty.query}')
-//			.beanRef('transformer', 'mapThingSearchResults')
 			.bean('transformer', 'mapThingSearchResults')
 
 		from('direct:removeThing')
 			.to('direct:getThing')
 			.setProperty('thing', body())
-//			.to('sql:delete from THING where id = :#${body.id}?dataSource=dataSource')
 			.to('sql:delete from THING where id = :#${body.id}')
-//			.setBody(property('thing'))
 	}
 }
 
